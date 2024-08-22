@@ -2,18 +2,29 @@ NAME = libft.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm
-RMFLAGS = -f
+RMFLAGS = -rf
 AR = ar
 ARFLAGS = rcs
 
-# Path
-SRC_PATH = src
-MENDATORY_PATH = $(SRC_PATH)/mendatory
-MENDATORY_PART_1_PATH = $(MENDATORY_PATH)/part_1
-BONUS_PATH = $(SRC_PATH)/bonus
+# Source Paths
+SOURCE_PATH = source
+SOURCE_MENDATORY_PATH = $(SOURCE_PATH)/mendatory
+SOURCE_PART1_PATH = $(SOURCE_MENDATORY_PATH)/part_1
+SOURCE_PART2_PATH = $(SOURCE_MENDATORY_PATH)/part_2
+SOURCE_BONUS_PATH = $(SOURCE_PATH)/bonus
 
-# Souce File Name
-FILE_NAME_PART_1 = ft_isalpha ft_isdigit ft_isalnum \
+# Object Paths
+OBJECT_PATH = object
+OBJECT_MENDATORY_PATH = $(OBJECT_PATH)/mendatory
+OBJECT_PART1_PATH = $(OBJECT_MENDATORY_PATH)/part_1
+OBJECT_PART2_PATH = $(OBJECT_MENDATORY_PATH)/part_2
+OBJECT_BONUS_PATH = $(OBJECT_PATH)/bonus
+
+# Include Path
+INCLUDE_PATH = include
+
+# File Names
+PART1_FILE_NAMES = ft_isalpha ft_isdigit ft_isalnum \
 				   ft_isascii ft_isprint ft_toupper \
 				   ft_tolower ft_strchr ft_strrchr \
 				   ft_strlen ft_strncmp ft_memset \
@@ -22,42 +33,52 @@ FILE_NAME_PART_1 = ft_isalpha ft_isdigit ft_isalnum \
 				   ft_strnstr ft_strlcat ft_atoi \
 				   ft_calloc ft_strdup
 
-FILE_NAME_PART_2 = ft_substr ft_strjoin ft_strtrim \
-			 	   ft_split ft_itoa ft_strmapi \
+PART2_FILE_NAMES = ft_substr ft_strjoin ft_strtrim \
+				   ft_split ft_itoa ft_strmapi \
 				   ft_striteri ft_putchar_fd ft_putstr_fd \
 				   ft_putendl_fd ft_putnbr_fd
 
-FILE_NAME_BONUS = ft_lstnew ft_lstadd_front ft_lstsize \
-				  ft_lstlast ft_lstadd_back ft_lstdelone \
-				  ft_lstclear ft_lstiter ft_lstmap
+BONUS_FILE_NAMES = ft_lstnew ft_lstadd_front ft_lstsize \
+				   ft_lstlast ft_lstadd_back ft_lstdelone \
+				   ft_lstclear ft_lstiter ft_lstmap
 
-OBJS_PART1 = $(SRCS_PART1:.c=.o)
-OBJS_PART2 = $(SRCS_PART2:.c=.o)
-OBJS_BONUS = $(SRCS_BONUS:.c=.o)
+# Source Files
+SOURCE_PART1 = $(addprefix $(SOURCE_PART1_PATH)/, $(addsuffix .c, $(PART1_FILE_NAMES)))
+SOURCE_PART2 = $(addprefix $(SOURCE_PART2_PATH)/, $(addsuffix .c, $(PART2_FILE_NAMES)))
+SOURCE_MEDATORY = $(SOURCE_PART1) $(SOURCE_PART2)
+SOURCE_BONUS = $(addprefix $(SOURCE_BONUS_PATH)/, $(addsuffix .c, $(BONUS_FILE_NAMES)))
+
+# Object Files
+OBJECT_PART1 = $(addprefix $(OBJECT_PART1_PATH)/, $(addsuffix .o, $(PART1_FILE_NAMES)))
+OBJECT_PART2 = $(addprefix $(OBJECT_PART2_PATH)/, $(addsuffix .o, $(PART2_FILE_NAMES)))
+OBJECT_MENDATORY = $(OBJECT_PART1) $(OBJECT_PART2)
+OBJECT_BONUS = $(addprefix $(OBJECT_BONUS_PATH)/, $(addsuffix .o, $(BONUS_FILE_NAMES)))
 
 ifdef WITH_BONUS
-	TOTAL_OBJS = $(OBJS_PART1) $(OBJS_PART2) $(OBJS_BONUS)
+	TOTAL_OBJECTS = $(OBJECT_MENDATORY) $(OBJECT_BONUS)
 else
-	TOTAL_OBJS = $(OBJS_PART1) $(OBJS_PART2)
+	TOTAL_OBJECTS = $(OBJECT_MENDATORY)
 endif
 
-all : $(NAME)
+all: $(NAME)
 
-clean : 
-	$(RM) $(RMFLAGS) $(OBJS_PART1) $(OBJS_PART2) $(OBJS_BONUS)
-
-fclean : clean
-	$(RM) $(RMFLAGS) $(NAME)
-
-re : fclean all
-
-bonus :
-	make WITH_BONUS=1
-
-$(NAME) : $(TOTAL_OBJS)
+$(NAME): $(TOTAL_OBJECTS)
 	$(AR) $(ARFLAGS) $@ $^
 
-%.o : %.c
-	$(CC) $(CFLAGS) -c $<
+clean: 
+	$(RM) $(RMFLAGS) $(TOTAL_OBJECTS)
+	$(RM) $(RMFLAGS) $(OBJECT_PATH)
+
+fclean: clean
+	$(RM) $(RMFLAGS) $(NAME)
+
+re: fclean all
+
+bonus:
+	make WITH_BONUS=1 all
+
+$(OBJECT_PATH)/%.o: $(SOURCE_PATH)/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -I$(INCLUDE_PATH)/ -c $< -o $@
 
 .PHONY: all clean fclean re bonus
