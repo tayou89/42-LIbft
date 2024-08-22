@@ -2,6 +2,7 @@
 - This is one of 42 Seoul subject makes a library having various functions. 
 - Every source codes are written by C programming language.
 - Strictly adhered to the requirements as outlined in the [Subject PDF](requirements/Libft.pdf) and [Norminette](requirements/nominette.pdf)
+- For downloading requirements, Click [Subject PDF](https://github.com/tayou89/Libft/raw/main/requirements/Libft.pdf) and [Nominette](https://github.com/tayou89/Libft/raw/main/requirements/nominette.pdf)
 # Usage
 1. `git clone https://github.com/tayou89/Libft.git`
 2. `cd Libft` or `cd [Cloned Folder Name]`
