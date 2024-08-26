@@ -3,54 +3,38 @@
 ## Description
 Libft is a project at 42 school that requires us to re-create some standard C library functions including some additional ones that can be useful for future projects.
 
+## Norminette
+This project adheres to the 42 school's coding standard enforced by the Norminette tool. For detailed rules, refer to the Norm PDF in the project resources.
+
 ## Table of Contents
 1. [Installation](#installation)
 2. [Usage](#usage)
 3. [Functions](#functions)
-   - [Libc Functions](#libc-functions)
-   - [Additional Functions](#additional-functions)
-   - [Bonus Functions](#bonus-functions)
 4. [Makefile](#makefile)
 5. [Testing](#testing)
 
 ## Installation
-To compile the library, clone this repository and run:
+To compile the library, run:
 
 ```
 make
 ```
 
-This will create the `libft.a` binary.
-
-To include the bonus functions, use:
+For bonus functions:
 
 ```
 make bonus
 ```
 
 ## Usage
-To use the libft library in your project, follow these steps:
-
-1. Include the header in your C file:
+1. Include the header:
    ```c
    #include "libft.h"
    ```
 
-2. Compile your project with libft.a:
+2. Compile your project:
    ```
    gcc your_c_file.c libft.a -o your_program
-   ```
-
-   Or, if you prefer:
-   ```
-   gcc your_c_file.c -L. -lft -o your_program
-   ```
-
-   The `-L.` flag tells the compiler to look for the library in the current directory, and `-lft` links against libft.a.
-
-3. Run your program:
-   ```
-   ./your_program
    ```
 
 ## Functions
@@ -105,28 +89,16 @@ To use the libft library in your project, follow these steps:
 - [ft_lstmap](sources/bonus/ft_lstmap.c)
 
 ## Makefile
-The project includes a Makefile for easy compilation and management. Here are the available commands:
+Available commands:
 
-- `make`: Compiles the project and generates the libft.a library.
-- `make bonus`: Compiles the project with bonus functions included.
-- `make clean`: Removes object files.
-- `make fclean`: Removes object files and the libft.a library.
-- `make re`: Performs a full recompilation (equivalent to `make fclean` followed by `make`).
-
-The Makefile uses the following flags for compilation:
-- `-Wall`: Enables all compiler's warning messages.
-- `-Wextra`: Enables some extra warning flags not enabled by `-Wall`.
-- `-Werror`: Treats all warnings as errors.
-
-Example usage:
-```
-make        # Compile the library
-make clean  # Remove object files
-make bonus  # Compile with bonus functions
-```
+- `make`: Compiles the library
+- `make bonus`: Includes bonus functions
+- `make clean`: Removes object files
+- `make fclean`: Removes object files and the library
+- `make re`: Recompiles the library
 
 ## Testing
-To test the library, you can create test programs for each function. Here's a simple example for `ft_strlen`:
+Example for testing `ft_strlen`:
 
 ```c
 #include "libft.h"
@@ -144,5 +116,3 @@ Compile and run:
 gcc test_strlen.c libft.a -o test_strlen
 ./test_strlen
 ```
-
-Note: This README provides a basic structure for the Libft project. You may want to add more details, such as function descriptions, return values, or specific usage examples based on your implementation.
