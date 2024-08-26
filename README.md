@@ -4,7 +4,7 @@
 Libft is a project at 42 school that requires us to re-create some standard C library functions including some additional ones that can be useful for future projects.
 
 ## Norminette
-This project adheres to the 42 school's coding standard enforced by the Norminette tool. For detailed rules, refer to the Norm PDF in the project resources.
+This project adheres to the 42 school's coding standard enforced by the Norminette tool. For detailed rules, refer to [the Norm PDF](requirements/nominette.pdf) in the project resources.
 
 ## Table of Contents
 1. [Installation](#installation)
